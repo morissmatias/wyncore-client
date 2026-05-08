@@ -6,6 +6,7 @@ import PageLoader from '../components/ui/PageLoader'
 import LandingPage    from '../pages/public/LandingPage'
 import CatalogPage    from '../pages/public/CatalogPage'
 import ServicesPage   from '../pages/public/ServicesPage'
+import ProductDetailPage from '../pages/public/ProductDetailPage'
 
 // Auth pages
 import LoginPage      from '../pages/auth/LoginPage'
@@ -58,6 +59,7 @@ export default function AppRoutes() {
       <Route path="/" element={<PublicLayout><LandingPage /></PublicLayout>} />
       <Route path="/catalog" element={<PublicLayout><CatalogPage /></PublicLayout>} />
       <Route path="/services" element={<PublicLayout><ServicesPage /></PublicLayout>} />
+      <Route path="/catalog/:id" element={<PublicLayout><ProductDetailPage /></PublicLayout>} />
 
       {/* Auth */}
       <Route path="/login"       element={<LoginPage />} />

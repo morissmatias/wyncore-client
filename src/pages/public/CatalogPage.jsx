@@ -32,7 +32,10 @@ export default function CatalogPage() {
             <p className="text-sm text-gray-500 mb-3 line-clamp-2">{p.description}</p>
             <div className="flex items-center justify-between">
               <span className="font-bold text-brand-green">{formatCurrency(p.price)}</span>
-              <button onClick={() => handleAdd(p)} className="btn-primary text-sm py-1.5">Add to Cart</button>
+              <div className="flex gap-2">
+                <button onClick={() => navigate(`/catalog/${p.id}`)} className="btn-outline text-sm py-1.5">View</button>
+                <button onClick={() => handleAdd(p)} className="btn-primary text-sm py-1.5">Add to Cart</button>
+              </div>
             </div>
           </div>
         ))}
