@@ -1,8 +1,8 @@
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
 import {
   FiHome, FiShoppingBag, FiFileText, FiUsers,
-  FiPackage, FiTruck, FiSettings, FiActivity
+  FiPackage, FiTruck, FiSettings, FiActivity, FiLogOut
 } from 'react-icons/fi'
 
 const navItems = {
@@ -32,8 +32,14 @@ const navItems = {
 }
 
 export default function AdminSidebar() {
-  const { user } = useAuth()
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
   const items = navItems[user?.role] || []
+
+  const handleLogout = () => {
+    logout()
+    navigate('/admin/login')
+  }
 
   return (
     <aside className="w-60 bg-brand-blue min-h-screen flex flex-col">
@@ -69,6 +75,16 @@ export default function AdminSidebar() {
           </NavLink>
         ))}
       </nav>
+
+      <div className="p-3 border-t border-blue-700">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-blue-200 hover:bg-red-600 hover:text-white transition-colors w-full"
+        >
+          <FiLogOut className="w-4 h-4" />
+          Logout
+        </button>
+      </div>
     </aside>
   )
 }
