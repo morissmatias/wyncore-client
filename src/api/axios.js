@@ -13,11 +13,13 @@ api.interceptors.request.use((config) => {
 api.interceptors.response.use(
   (res) => res,
   (err) => {
-    if (err.response?.status === 401) {
+    const isAuthRoute = err.config?.url?.includes('/auth/')
+    if (err.response?.status === 401 && !isAuthRoute) {
+      const userType = localStorage.getItem('userType')
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       localStorage.removeItem('userType')
-      window.location.href = '/login'
+      window.location.href = userType === 'admin' ? '/admin/login' : '/login'
     }
     return Promise.reject(err)
   }
