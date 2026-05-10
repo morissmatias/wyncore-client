@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js'
 
-const supabaseUrl = 'https://tsexmdwblxivmxqkyeim.supabase.co'
-const supabaseKey = 'sb_publishable_Ky4RGkmR1TQdZGbakMU2xw_lrQ9x9mD'
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
 
 export const supabase = createClient(supabaseUrl, supabaseKey)
 
@@ -9,15 +9,15 @@ export const uploadProductImage = async (file) => {
   const fileExt = file.name.split('.').pop()
   const fileName = `${Date.now()}.${fileExt}`
 
-  const { error } = await supabase.storage
+  const { data, error } = await supabase.storage
     .from('product-images')
-    .upload(fileName, file)
+    .upload(fileName, file, { upsert: true })
 
   if (error) throw error
 
-  const { data } = supabase.storage
+  const { data: urlData } = supabase.storage
     .from('product-images')
     .getPublicUrl(fileName)
 
-  return data.publicUrl
+  return urlData.publicUrl
 }
