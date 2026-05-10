@@ -25,11 +25,12 @@ export default function CustomerDashboard() {
           </div>
         ))}
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
         {[
           { to: '/catalog', icon: FiPackage, label: 'Browse Products', desc: 'Shop transformers, lighting, and panels' },
           { to: '/request-service', icon: FiSettings, label: 'Request Service', desc: 'Submit a service request' },
           { to: '/my-orders', icon: FiShoppingBag, label: 'My Orders', desc: 'Track your orders and requests' },
+          { to: '/profile', icon: FiUser, label: 'My Profile', desc: 'Update your account details' },
         ].map(({ to, icon: Icon, label, desc }) => (
           <Link key={to} to={to} className="card hover:shadow-md transition-shadow text-center">
             <Icon className="w-8 h-8 text-brand-green mx-auto mb-2" />
