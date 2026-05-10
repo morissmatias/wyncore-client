@@ -27,7 +27,12 @@ export default function CatalogPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {products?.map(p => (
           <div key={p.id} className="card hover:shadow-md transition-shadow">
-            <div className="h-40 bg-gray-100 rounded-lg mb-4 flex items-center justify-center text-gray-400 text-sm">{p.category}</div>
+            <div className="h-40 bg-gray-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
+              {p.imageUrl
+                ? <img src={p.imageUrl} alt={p.name} className="w-full h-full object-cover" />
+                : <span className="text-gray-400 text-sm">{p.category}</span>
+              }
+            </div>
             <h3 className="font-semibold text-brand-blue mb-1">{p.name}</h3>
             <p className="text-sm text-gray-500 mb-3 line-clamp-2">{p.description}</p>
             <div className="flex items-center justify-between">
