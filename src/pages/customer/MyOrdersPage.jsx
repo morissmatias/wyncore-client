@@ -54,7 +54,7 @@ export default function MyOrdersPage() {
                 {/* Invoice summary - always visible */}
                 {order.invoice && (
                   <p className="text-sm text-gray-600 mt-2">
-                    Invoice: <span className="font-medium">{order.invoice.invoiceNumber}</span> — {formatCurrency(order.invoice.totalAmount)}
+                    Invoice: <span className="font-medium">{order.invoice.invoiceNumber}</span> — {order.orderType === 'SERVICE' && Number(order.invoice.totalAmount) === 0 ? <span className="text-yellow-600 font-medium">To be quoted</span> : formatCurrency(order.invoice.totalAmount)}
                   </p>
                 )}
 
